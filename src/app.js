@@ -4,8 +4,8 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
-import PageA from './components/a';
-import PageB from './components/b'
+import PageA from './pages/a';
+import PageB from './pages/b'
 
 
 export default () => (
