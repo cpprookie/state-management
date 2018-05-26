@@ -1,62 +1,25 @@
-import React, { Component } from 'react';
-import Cards from '../components/cards';
-import Prompt from '../components/Prompt'
+import React from 'react';
+import CardContainer from '../containers/CardContainer';
+import PromptContainer from '../containers/PromptContainer';
+import { connect } from 'react-redux';
+import { toogleTools } from '../actions/actions';
+ 
+const PageA = ({ onButtonClick }) => {
+  return (
+    <div>
+      <button onClick={() => { onButtonClick() }}>Use tool</button>
+      <CardContainer />
+      <PromptContainer />
+    </div>
+  )
+}
 
-export default class PageA extends Component {
-  constructor() {
-    super();
-    this.state = {
-      tools: [
-        { name: 'egg' },
-        { name: 'boom' },
-        { name: 'kiss' },
-      ],
-      showTools: false,
-      showPrompt: false,
-      currentTool: '',
-    };
-    const methods = [ 
-      'closePrompt',
-      'pickTool'
-    ]
-    methods.forEach(method => {
-      this[method] = this[method].bind(this);
-    });
-  }
-
-  toggleTools() {
-    this.setState(prevState => { 
-      return {
-        showTools: !prevState.showTools
-      } 
-    });
-    // this.setState({ showTools: true })
-  }
-
-  closePrompt(confirm) {
-    this.setState({
-      showPrompt: false,
-      showTools: !confirm,
-    })
-    if (confirm) {
-      this.props.history.push('/b', { currentTool: this.state.currentTool })
+const mapDispatchToProps = dispatch => {
+  return {
+    onButtonClick: () => {
+      dispatch(toogleTools())
     }
   }
-
-  pickTool(name) {
-    this.setState({ 
-      currentTool: name,
-      showPrompt: true,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <button onClick={() => { this.toggleTools() }}>Use tool</button>
-        { this.state.showTools ? <Cards tools={this.state.tools} clickHandler = {this.pickTool} /> : null}
-        { this.state.showPrompt? <Prompt currentTool={this.state.currentTool} clickHandler={this.closePrompt} /> : null}
-      </div>
-    )
-  }
 }
+
+export default connect(null, mapDispatchToProps)(PageA);

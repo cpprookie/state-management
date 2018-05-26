@@ -9,10 +9,10 @@ import PageB from './pages/b'
 
 
 export default () => (
-    <Router>
-      <div>
-        <Route path="/a" component={PageA} />
-        <Route path="/b" component={PageB} />
-      </div>
-    </Router>
-  )
+  <Router>
+    <div>
+      <Route path="/a" component={PageA} />
+      <Route path="/b" component={PageB} />
+    </div>
+  </Router>
+)

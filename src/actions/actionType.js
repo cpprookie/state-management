@@ -1,0 +1,4 @@
+export const TOOGLE_TOOLS = 'TOOGLE_TOOLS';
+export const CONFIRM_USETOOL = 'CONFIRM_USETOOL';
+export const SELECT_TOOL = 'SELECT_TOOL';
+export const SWITCH_PROMPT = 'SWITCH_PROMPT';
