@@ -1,12 +1,20 @@
 import React from "react";
+import { inject, observer } from 'mobx-react';
 
-export default ({ currentTool, clickHandler }) => currentTool ? (
-  <section>
-    <p>Are u sure to use {currentTool} ?</p>
-    <div className="prompt-button-wrapper">
-      <button onClick={() => {clickHandler(true)}}>Yes</button>
-      <button onClick={() => {clickHandler(false)}}>Cancel</button>
-    </div>
-  </section>
-) : null
+const Prompt = inject('store')(observer(({ store }) => {
+  const { showPrompt, currentTool, confirmUseTool } = store;
+  if (!showPrompt) {
+    return null
+  }
+  return (
+    <section>
+      <p>Are u sure to use {currentTool.name} ?</p>
+      <div className="prompt-button-wrapper">
+        <button onClick={() => {confirmUseTool(true)}}>Yes</button>
+        <button onClick={() => {confirmUseTool(false)}}>Cancel</button>
+      </div>
+    </section>
+  );
+}));
 
+export default Prompt;
